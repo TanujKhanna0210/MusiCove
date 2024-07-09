@@ -2,7 +2,7 @@
 <resources>
 
     <style name="Theme.MusiCove" parent="android:Theme.Material.Light.NoActionBar" >
-        <item name="android:statusBarColor">@color/colorBackgroundLight</item>
+        <item name="android:statusBarColor">@color/colorBackgroundDark</item>
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 </resources>
