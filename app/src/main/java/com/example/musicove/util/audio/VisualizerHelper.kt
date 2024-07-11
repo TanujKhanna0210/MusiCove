@@ -27,7 +27,7 @@ class VisualizerHelper {
                 if (lastDateTimestamp == null || durationSinceLastData > SAMPLING_INTERVAL) {
                     onData(
                         VisualizerData(
-                            rawWaveForm = waveform,
+                            rawWaveForm = waveform.clone(),
                             captureSize = CAPTURE_SIZE
                         )
                     )
@@ -45,7 +45,7 @@ class VisualizerHelper {
 
         }
 
-    fun start(audioSessionId: Int, onData: (VisualizerData) -> Unit) {
+    fun start(audioSessionId: Int = 0, onData: (VisualizerData) -> Unit) {
         stop()
         visualizer = Visualizer(audioSessionId).apply {
             enabled = false
