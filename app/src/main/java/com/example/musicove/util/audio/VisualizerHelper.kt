@@ -60,7 +60,7 @@ class VisualizerHelper {
         }
     }
 
-    private fun stop() {
+    fun stop() {
         visualizer?.release()
         visualizer = null
     }

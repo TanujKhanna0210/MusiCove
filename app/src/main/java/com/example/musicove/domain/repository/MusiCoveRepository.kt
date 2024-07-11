@@ -9,5 +9,5 @@ interface MusiCoveRepository {
 
     suspend fun getAudios(): List<AudioMetadata>
 
-    suspend fun getAlbumArt(context: Context, uri: Uri): Bitmap?
+    suspend fun loadCoverBitmap(context: Context, uri: Uri): Bitmap?
 }

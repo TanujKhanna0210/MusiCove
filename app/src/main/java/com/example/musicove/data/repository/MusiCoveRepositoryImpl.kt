@@ -19,9 +19,9 @@ class MusiCoveRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getAlbumArt(context: Context, uri: Uri): Bitmap? {
+    override suspend fun loadCoverBitmap(context: Context, uri: Uri): Bitmap? {
         return withContext(Dispatchers.IO) {
-            metadataHelper.getAlbumArt(
+            metadataHelper.loadCoverBitmap(
                 context = context,
                 uri = uri
             )

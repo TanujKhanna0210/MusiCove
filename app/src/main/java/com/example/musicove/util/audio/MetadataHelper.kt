@@ -40,7 +40,7 @@ class MetadataHelper @Inject constructor(
     }
 
     @WorkerThread
-    fun getAlbumArt(context: Context, uri: Uri): Bitmap? {
+    fun loadCoverBitmap(context: Context, uri: Uri): Bitmap? {
         val mediaMetadataRetriever = MediaMetadataRetriever()
         mediaMetadataRetriever.setDataSource(context, uri)
 
