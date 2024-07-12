@@ -1,6 +1,6 @@
 package com.example.musicove.ui.theme
 
-import androidx.compose.material3.Typography
+import androidx.compose.material.Typography
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -9,7 +9,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.musicove.R
 
-// Set of Material typography styles to start with
 private val nunito = FontFamily(
     Font(R.font.nunito_regular, FontWeight.W400),
     Font(R.font.nunito_medium, FontWeight.W500),
@@ -17,67 +16,67 @@ private val nunito = FontFamily(
 )
 
 val Typography = Typography(
-    headlineLarge = TextStyle(
+    h1 = TextStyle(
         fontFamily = nunito,
         fontWeight = FontWeight.W500,
         fontSize = 30.sp
     ),
-    headlineMedium = TextStyle(
+    h2 = TextStyle(
         fontFamily = nunito,
         fontWeight = FontWeight.W500,
         fontSize = 24.sp
     ),
-    headlineSmall = TextStyle(
+    h3 = TextStyle(
         fontFamily = nunito,
         fontWeight = FontWeight.W500,
         fontSize = 20.sp
     ),
-    titleLarge = TextStyle(
+    h4 = TextStyle(
         fontFamily = nunito,
         fontWeight = FontWeight.W400,
         fontSize = 18.sp
     ),
-    titleMedium = TextStyle(
+    h5 = TextStyle(
         fontFamily = nunito,
         fontWeight = FontWeight.W400,
         fontSize = 16.sp
     ),
-    titleSmall = TextStyle(
+    h6 = TextStyle(
         fontFamily = nunito,
         fontWeight = FontWeight.W400,
         fontSize = 14.sp
     ),
-    labelLarge = TextStyle(
+    subtitle1 = TextStyle(
         fontFamily = nunito,
         fontWeight = FontWeight.W500,
         fontSize = 16.sp,
     ),
-    labelMedium = TextStyle(
+    subtitle2 = TextStyle(
         fontFamily = nunito,
         fontWeight = FontWeight.W400,
         fontSize = 14.sp,
     ),
-    bodyLarge = TextStyle(
+    body1 = TextStyle(
         fontFamily = nunito,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
     ),
-    bodyMedium = TextStyle(
+    body2 = TextStyle(
         fontFamily = nunito,
         fontSize = 14.sp
     ),
-    displayLarge = TextStyle(
+    button = TextStyle(
         fontFamily = nunito,
         fontWeight = FontWeight.W400,
         fontSize = 15.sp,
         color = Color.White
     ),
-    displayMedium = TextStyle(
+    caption = TextStyle(
         fontFamily = nunito,
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp
     ),
-    displaySmall = TextStyle(
+    overline = TextStyle(
         fontFamily = nunito,
         fontWeight = FontWeight.W400,
         fontSize = 10.sp

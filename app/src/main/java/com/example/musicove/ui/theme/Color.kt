@@ -1,4 +1,4 @@
-package com.dev.headphoneplayer.ui.theme
+package com.example.musicove.ui.theme
 
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color

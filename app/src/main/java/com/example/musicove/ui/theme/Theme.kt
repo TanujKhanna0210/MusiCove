@@ -2,30 +2,19 @@ package com.example.musicove.ui.theme
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Shapes
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import com.dev.headphoneplayer.ui.theme.BackGroundColor
-import com.dev.headphoneplayer.ui.theme.Black1
-import com.dev.headphoneplayer.ui.theme.Black2
-import com.dev.headphoneplayer.ui.theme.Black3
-import com.dev.headphoneplayer.ui.theme.Gray200
-import com.dev.headphoneplayer.ui.theme.Gray300
-import com.dev.headphoneplayer.ui.theme.RedErrorDark
-import com.dev.headphoneplayer.ui.theme.RedErrorLight
-import com.dev.headphoneplayer.ui.theme.SurfaceColor
-import com.dev.headphoneplayer.ui.theme.Teal200
-import com.dev.headphoneplayer.ui.theme.TealA700
-import com.dev.headphoneplayer.ui.theme.White
-import com.dev.headphoneplayer.ui.theme.onBackGround
-import com.dev.headphoneplayer.ui.theme.onSurface
+import androidx.compose.ui.unit.dp
 
 @SuppressLint("ConflictingOnColor")
-private val DarkColorPalette = darkColorScheme(
+private val DarkColorPalette = darkColors(
     primary = Teal200,
     onPrimary = White,
-    primaryContainer = TealA700,
+    primaryVariant = TealA700,
     secondary = Teal200,
     error = RedErrorLight,
     background = Black2,
@@ -35,10 +24,10 @@ private val DarkColorPalette = darkColorScheme(
 )
 
 @SuppressLint("ConflictingOnColor")
-private val LightColorPalette = lightColorScheme(
+private val LightColorPalette = lightColors(
     primary = Teal200,
     onPrimary = White,
-    primaryContainer = TealA700,
+    primaryVariant = TealA700,
     secondary = Teal200,
     onSecondary = Black1,
     error = RedErrorDark,
@@ -61,8 +50,13 @@ fun MusiCoveTheme(
     }
 
     MaterialTheme(
-        colorScheme = colors,
+        colors = colors,
         typography = Typography,
+        shapes = Shapes(
+            small = RoundedCornerShape(4.dp),
+            medium = RoundedCornerShape(6.dp),
+            large = RoundedCornerShape(8.dp)
+        ),
         content = content
     )
 }
