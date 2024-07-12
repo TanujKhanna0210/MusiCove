@@ -43,7 +43,8 @@ class MainViewModel @Inject constructor(
 
             is AudioPlayerEvent.InitAudio -> initAudio(
                 context = event.context,
-                audio = event.audio
+                audio = event.audio,
+                onAudioInitialized = event.onAudioInitialized
             )
 
             AudioPlayerEvent.LoadMedias -> loadMedias()
@@ -77,7 +78,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    private fun initAudio(audio: AudioMetadata, context: Context) {
+    private fun initAudio(audio: AudioMetadata, context: Context, onAudioInitialized: () -> Unit) {
         viewModelScope.launch {
             _state = _state.copy(isLoading = true)
 
@@ -93,6 +94,10 @@ class MainViewModel @Inject constructor(
             _player = MediaPlayer().apply {
                 setDataSource(context, audio.contentUri)
                 prepare()
+            }
+
+            _player?.setOnPreparedListener {
+                onAudioInitialized()
             }
 
             _state = _state.copy(isLoading = false)

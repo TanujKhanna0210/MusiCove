@@ -7,7 +7,8 @@ sealed class AudioPlayerEvent {
 
     data class InitAudio(
         val audio: AudioMetadata,
-        val context: Context
+        val context: Context,
+        val onAudioInitialized: () -> Unit
     ): AudioPlayerEvent()
 
     data class Seek(

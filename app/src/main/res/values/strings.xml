@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MusiCove</string>
     <string name="no_media">It seems there are no mp3 files in your music folder.</string>
+    <string name="tracks">Tracks</string>
 </resources>
