@@ -2,4 +2,8 @@
     <string name="app_name">MusiCove</string>
     <string name="no_media">It seems there are no mp3 files in your music folder.</string>
     <string name="tracks">Tracks</string>
+    <string name="ok_button_text">Open app settings</string>
+    <string name="cancel_button_text">Cancel</string>
+    <string name="permissions_dialog_text">Please grant the permissions to play the mp3 files.</string>
+    <string name="error_while_opening_settings">Error occurred while opening settings for this application</string>
 </resources>
