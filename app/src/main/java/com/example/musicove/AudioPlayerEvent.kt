@@ -9,17 +9,19 @@ sealed class AudioPlayerEvent {
         val audio: AudioMetadata,
         val context: Context,
         val onAudioInitialized: () -> Unit
-    ): AudioPlayerEvent()
+    ) : AudioPlayerEvent()
 
     data class Seek(
         val position: Float
-    ): AudioPlayerEvent()
+    ) : AudioPlayerEvent()
 
-    object Play: AudioPlayerEvent()
+    object Play : AudioPlayerEvent()
 
-    object Pause: AudioPlayerEvent()
+    object Pause : AudioPlayerEvent()
 
-    object Stop: AudioPlayerEvent()
+    object Stop : AudioPlayerEvent()
 
-    object LoadMedias: AudioPlayerEvent()
+    object LoadMedias : AudioPlayerEvent()
+
+    object HideLoadingDialog : AudioPlayerEvent()
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
@@ -24,11 +26,13 @@ import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.musicove.ui.components.LoadingDialog
 import com.example.musicove.ui.components.Track
 import com.example.musicove.ui.components.WarningMessage
 import com.example.musicove.ui.theme.MusiCoveTheme
@@ -126,7 +130,18 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     },
-                    content = {}
+                    content = {
+                        LoadingDialog(
+                            isLoading = state.isLoading,
+                            onDone = {
+                                mainViewModel.onEvent(event = AudioPlayerEvent.HideLoadingDialog)
+                            },
+                            modifier = Modifier
+                                .clip(MaterialTheme.shapes.large)
+                                .background(MaterialTheme.colors.surface)
+                                .requiredSize(size = 80.dp)
+                        )
+                    }
                 )
             }
         }

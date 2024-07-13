@@ -58,6 +58,8 @@ class MainViewModel @Inject constructor(
             )
 
             AudioPlayerEvent.Stop -> stop()
+
+            AudioPlayerEvent.HideLoadingDialog -> hideLoadingDialog()
         }
     }
 
@@ -137,6 +139,10 @@ class MainViewModel @Inject constructor(
         _player?.run {
             seekTo(position.toInt())
         }
+    }
+
+    private fun hideLoadingDialog() {
+        _state = _state.copy(isLoading = false)
     }
 
 }
