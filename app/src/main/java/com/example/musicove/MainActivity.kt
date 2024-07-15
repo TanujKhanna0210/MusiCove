@@ -9,6 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -37,6 +38,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -50,9 +52,11 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.musicove.ui.components.LoadingDialog
+import com.example.musicove.ui.components.StackedBarVisualizer
 import com.example.musicove.ui.components.TopBar
 import com.example.musicove.ui.components.Track
 import com.example.musicove.ui.components.WarningMessage
+import com.example.musicove.ui.theme.Black3
 import com.example.musicove.ui.theme.MusiCoveTheme
 import com.example.musicove.ui.theme.Pink500
 import com.example.musicove.util.audio.isNotEmpty
@@ -298,6 +302,22 @@ class MainActivity : ComponentActivity() {
 
                             Spacer(modifier = Modifier.height(16.dp))
 
+                            StackedBarVisualizer(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .requiredHeight(height = 200.dp)
+                                    .padding(vertical = 4.dp, horizontal = 8.dp),
+                                shape = MaterialTheme.shapes.large,
+                                barCount = 32,
+                                barColors = listOf(
+                                    Color(0xFF1BEBE9),
+                                    Color(0xFF39AFEA),
+                                    Color(0xFF0291D8)
+                                ),
+                                stackedBarBackgroundColor = if (isSystemInDarkTheme()) Black3 else
+                                    MaterialTheme.colors.onSurface.copy(alpha = 0.25f),
+                                data = mainViewModel.visualizerData.value
+                            )
                         }
                     }
                 )
