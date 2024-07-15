@@ -245,7 +245,7 @@ class MainActivity : ComponentActivity() {
                                             context = context,
                                             permissions = arrayOf(
                                                 Manifest.permission.RECORD_AUDIO,
-                                                Manifest.permission.READ_EXTERNAL_STORAGE
+                                                Manifest.permission.READ_MEDIA_AUDIO
                                             ),
                                             launcher = launcher,
                                             onPermissionsGranted = {
