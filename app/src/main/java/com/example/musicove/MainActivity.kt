@@ -64,10 +64,11 @@ import com.example.musicove.ui.components.WarningMessage
 import com.example.musicove.ui.theme.Black3
 import com.example.musicove.ui.theme.MusiCoveTheme
 import com.example.musicove.ui.theme.Pink500
-import com.example.musicove.util.audio.isNotEmpty
-import com.example.musicove.util.audio.screenHeight
-import com.example.musicove.util.audio.setupPermissions
-import com.example.musicove.util.audio.showPermissionRationalDialog
+import com.example.musicove.util.FORWARD_BACKWARD_STEP
+import com.example.musicove.util.isNotEmpty
+import com.example.musicove.util.screenHeight
+import com.example.musicove.util.setupPermissions
+import com.example.musicove.util.showPermissionRationalDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -326,7 +327,7 @@ class MainActivity : ComponentActivity() {
                             )
 
                             Spacer(modifier = Modifier.requiredHeight(height = 10.dp))
-                            
+
                             TimeBar(
                                 currentPosition = state.currentPosition,
                                 duration = state.selectedAudio.duration,
@@ -338,7 +339,7 @@ class MainActivity : ComponentActivity() {
                                     )
                                 }
                             )
-                            
+
                             Spacer(modifier = Modifier.requiredHeight(height = 10.dp))
 
                             Row(
@@ -348,8 +349,14 @@ class MainActivity : ComponentActivity() {
                                 horizontalArrangement = Arrangement.Center
                             ) {
                                 FastButton(
-                                    enabled = false,
-                                    onClick = { /*TODO*/ },
+                                    enabled = state.currentPosition > FORWARD_BACKWARD_STEP,
+                                    onClick = {
+                                        mainViewModel.onEvent(
+                                            event = AudioPlayerEvent.Seek(
+                                                position = state.currentPosition - FORWARD_BACKWARD_STEP
+                                            )
+                                        )
+                                    },
                                     iconResId = R.drawable.backward_solid
                                 )
 
@@ -368,8 +375,14 @@ class MainActivity : ComponentActivity() {
                                 )
 
                                 FastButton(
-                                    enabled = false,
-                                    onClick = { /*TODO*/ },
+                                    enabled = state.currentPosition < (state.selectedAudio.duration - FORWARD_BACKWARD_STEP),
+                                    onClick = {
+                                        mainViewModel.onEvent(
+                                            event = AudioPlayerEvent.Seek(
+                                                position = state.currentPosition + FORWARD_BACKWARD_STEP
+                                            )
+                                        )
+                                    },
                                     iconResId = R.drawable.forward_solid
                                 )
                             }
