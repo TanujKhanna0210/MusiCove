@@ -51,7 +51,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.example.musicove.ui.components.FastButton
 import com.example.musicove.ui.components.LoadingDialog
+import com.example.musicove.ui.components.PlayPauseButton
 import com.example.musicove.ui.components.StackedBarVisualizer
 import com.example.musicove.ui.components.TopBar
 import com.example.musicove.ui.components.Track
@@ -193,7 +195,7 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier
                                 .fillMaxSize()
                                 .verticalScroll(state = rememberScrollState())
-                                .background(MaterialTheme.colors.onBackground),
+                                .background(MaterialTheme.colors.background),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
 
@@ -318,6 +320,41 @@ class MainActivity : ComponentActivity() {
                                     MaterialTheme.colors.onSurface.copy(alpha = 0.25f),
                                 data = mainViewModel.visualizerData.value
                             )
+
+                            Spacer(modifier = Modifier.requiredHeight(height = 10.dp))
+
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(10.dp),
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                FastButton(
+                                    enabled = false,
+                                    onClick = { /*TODO*/ },
+                                    iconResId = R.drawable.backward_solid
+                                )
+
+                                PlayPauseButton(
+                                    enabled = state.selectedAudio.isNotEmpty(),
+                                    isPlaying = state.isPlaying,
+                                    modifier = Modifier.padding(
+                                        horizontal = 26.dp
+                                    ),
+                                    onPlay = {
+                                        mainViewModel.onEvent(event = AudioPlayerEvent.Play)
+                                    },
+                                    onPause = {
+                                        mainViewModel.onEvent(event = AudioPlayerEvent.Pause)
+                                    }
+                                )
+
+                                FastButton(
+                                    enabled = false,
+                                    onClick = { /*TODO*/ },
+                                    iconResId = R.drawable.forward_solid
+                                )
+                            }
                         }
                     }
                 )
