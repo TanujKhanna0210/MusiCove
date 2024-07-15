@@ -2,6 +2,8 @@ package com.example.musicove
 
 import android.content.Context
 import android.media.MediaPlayer
+import android.os.Handler
+import android.os.Looper
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -13,6 +15,7 @@ import com.example.musicove.domain.repository.MusiCoveRepository
 import com.example.musicove.util.audio.VisualizerData
 import com.example.musicove.util.audio.VisualizerHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Runnable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -33,6 +36,8 @@ class MainViewModel @Inject constructor(
     private val _visualizerData = mutableStateOf(VisualizerData.emptyVisualizeData())
     val visualizerData: State<VisualizerData>
         get() = _visualizerData
+
+    private val _handler = Handler(Looper.getMainLooper())
 
     init {
         loadMedias()
@@ -98,6 +103,10 @@ class MainViewModel @Inject constructor(
                 prepare()
             }
 
+            _player?.setOnCompletionListener {
+                pause()
+            }
+
             _player?.setOnPreparedListener {
                 onAudioInitialized()
             }
@@ -118,6 +127,17 @@ class MainViewModel @Inject constructor(
                 }
             )
         }
+
+        _handler.postDelayed(object : Runnable {
+            override fun run() {
+                try {
+                    _state = _state.copy(currentPosition = _player!!.currentPosition)
+                    _handler.postDelayed(this, 1000)
+                } catch (exp: Exception) {
+                    _state = _state.copy(currentPosition = 0)
+                }
+            }
+        }, 0)
     }
 
     private fun pause() {
@@ -131,7 +151,10 @@ class MainViewModel @Inject constructor(
         _player?.stop()
         _player?.reset()
         _player?.release()
-        _state = _state.copy(isPlaying = false)
+        _state = _state.copy(
+            isPlaying = false,
+            currentPosition = 0
+        )
         _player = null
     }
 

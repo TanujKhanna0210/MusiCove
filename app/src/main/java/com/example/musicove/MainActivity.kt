@@ -1,12 +1,14 @@
 package com.example.musicove
 
 import android.Manifest
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -55,6 +57,7 @@ import com.example.musicove.ui.components.FastButton
 import com.example.musicove.ui.components.LoadingDialog
 import com.example.musicove.ui.components.PlayPauseButton
 import com.example.musicove.ui.components.StackedBarVisualizer
+import com.example.musicove.ui.components.TimeBar
 import com.example.musicove.ui.components.TopBar
 import com.example.musicove.ui.components.Track
 import com.example.musicove.ui.components.WarningMessage
@@ -70,6 +73,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @OptIn(ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -321,6 +325,20 @@ class MainActivity : ComponentActivity() {
                                 data = mainViewModel.visualizerData.value
                             )
 
+                            Spacer(modifier = Modifier.requiredHeight(height = 10.dp))
+                            
+                            TimeBar(
+                                currentPosition = state.currentPosition,
+                                duration = state.selectedAudio.duration,
+                                onValueChange = { position ->
+                                    mainViewModel.onEvent(
+                                        event = AudioPlayerEvent.Seek(
+                                            position = position
+                                        )
+                                    )
+                                }
+                            )
+                            
                             Spacer(modifier = Modifier.requiredHeight(height = 10.dp))
 
                             Row(
