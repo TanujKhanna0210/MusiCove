@@ -8,6 +8,11 @@ import android.net.Uri
 import android.provider.Settings
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.annotation.StringRes
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.example.musicove.domain.model.AudioMetadata
 
@@ -57,4 +62,10 @@ fun showPermissionRationalDialog(
             dialog.dismiss()
         }
         .show()
+}
+
+@Composable
+fun screenHeight(): Dp {
+    return LocalContext.current.resources.displayMetrics.heightPixels.dp /
+            LocalDensity.current.density
 }
