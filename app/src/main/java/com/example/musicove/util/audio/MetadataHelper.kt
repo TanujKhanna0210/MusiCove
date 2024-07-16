@@ -95,7 +95,7 @@ class MetadataHelper @Inject constructor(
                             cover = null,
                             songTitle = title,
                             artist = artist,
-                            duration = durationColumn
+                            duration = duration
                         )
                     }
                 }
