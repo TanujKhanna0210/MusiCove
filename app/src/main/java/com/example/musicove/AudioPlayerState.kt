@@ -7,5 +7,6 @@ data class AudioPlayerState(
     val audiosList: List<AudioMetadata> = emptyList(),
     val selectedAudio: AudioMetadata = AudioMetadata.emptyMetadata(),
     val isPlaying: Boolean = false,
-    val currentPosition: Int = 0
+    val currentPosition: Int = 0,
+    val favoriteSongs: List<Long> = emptyList()
 )

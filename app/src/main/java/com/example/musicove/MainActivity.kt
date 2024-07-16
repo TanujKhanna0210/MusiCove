@@ -54,6 +54,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.musicove.ui.components.FastButton
+import com.example.musicove.ui.components.LikeButton
 import com.example.musicove.ui.components.LoadingDialog
 import com.example.musicove.ui.components.PlayPauseButton
 import com.example.musicove.ui.components.StackedBarVisualizer
@@ -63,7 +64,6 @@ import com.example.musicove.ui.components.Track
 import com.example.musicove.ui.components.WarningMessage
 import com.example.musicove.ui.theme.Black3
 import com.example.musicove.ui.theme.MusiCoveTheme
-import com.example.musicove.ui.theme.Pink500
 import com.example.musicove.util.FORWARD_BACKWARD_STEP
 import com.example.musicove.util.isNotEmpty
 import com.example.musicove.util.screenHeight
@@ -213,11 +213,14 @@ class MainActivity : ComponentActivity() {
                                     )
                                     .requiredHeight(height = 80.dp),
                                 leadingIcon = {
-                                    Icon(
-                                        painter = painterResource(id = R.drawable.heart_outlined),
-                                        contentDescription = "",
-                                        tint = Pink500,
-                                        modifier = Modifier.requiredSize(size = 26.dp)
+                                    LikeButton(
+                                        isFavorite = state.favoriteSongs.contains(state.selectedAudio.songId),
+                                        enabled = state.selectedAudio.isNotEmpty(),
+                                        onClick = {
+                                            mainViewModel.onEvent(event = AudioPlayerEvent.LikeOrUnlikeSong(
+                                                id = state.selectedAudio.songId
+                                            ))
+                                        }
                                     )
                                 },
                                 title = {

@@ -15,6 +15,8 @@ sealed class AudioPlayerEvent {
         val position: Float
     ) : AudioPlayerEvent()
 
+    data class LikeOrUnlikeSong(val id: Long) : AudioPlayerEvent()
+
     object Play : AudioPlayerEvent()
 
     object Pause : AudioPlayerEvent()

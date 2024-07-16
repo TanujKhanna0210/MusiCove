@@ -65,6 +65,8 @@ class MainViewModel @Inject constructor(
             AudioPlayerEvent.Stop -> stop()
 
             AudioPlayerEvent.HideLoadingDialog -> hideLoadingDialog()
+
+            is AudioPlayerEvent.LikeOrUnlikeSong -> likeOrUnlikeSong(id = event.id)
         }
     }
 
@@ -73,7 +75,13 @@ class MainViewModel @Inject constructor(
             _state = _state.copy(isLoading = true)
             val audios = mutableListOf<AudioMetadata>()
             audios.addAll(prepareAudios())
-            _state = _state.copy(audiosList = audios, isLoading = false)
+            _state = _state.copy(audiosList = audios)
+            repository.getFavoriteSongs().collect { favoriteSongs ->
+                _state = _state.copy(
+                    favoriteSongs = favoriteSongs,
+                    isLoading = false
+                )
+            }
         }
     }
 
@@ -166,6 +174,12 @@ class MainViewModel @Inject constructor(
 
     private fun hideLoadingDialog() {
         _state = _state.copy(isLoading = false)
+    }
+
+    private fun likeOrUnlikeSong(id: Long) {
+        viewModelScope.launch {
+            repository.likeOrUnlikeSong(id = id)
+        }
     }
 
 }
